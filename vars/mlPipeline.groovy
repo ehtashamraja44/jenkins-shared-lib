@@ -5,9 +5,10 @@ def setup() {
 def dev() {
     setup()
     stage('Data Ingest')  { bat 'python src/ingest.py' }
-    stage('Model Train')  { bat 'python src/train.py Challenger' }
-    stage('Model Deploy') { bat 'python src/deploy.py Challenger' }
-    stage('Model Test')   { bat 'python src/test_model.py Challenger' }
+    stage('Model Train')  { bat 'python src/train.py Challenger-candidate' }
+    stage('Model Deploy') { bat 'python src/deploy.py Challenger-candidate' }
+    stage('Model Test')   { bat 'python src/test_model.py Challenger-candidate' }
+    stage('Register as Challenger') { bat 'python src/promote.py Challenger-candidate Challenger' }
 }
 
 def preprod() {
